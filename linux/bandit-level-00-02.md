@@ -20,7 +20,7 @@ Learned to connect to a non-standard port.
 ---
 
 ## 🧱 Level 0 - 1
-**Goal:**The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.
+**Goal:** The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.
 
 **Commands used:**
 ```bash
@@ -29,14 +29,15 @@ cat fileneame
 note: password found. saved to local machine
 
 ### ✅ Key Points:
-leveraged the cat command
+Leveraged the cat command
 The cat command in Unix-like operating systems (including Linux and macOS) is a fundamental utility primarily used for concatenating and displaying file contents. The name "cat" is an abbreviation for "concatenate."
 Here are its primary uses:
 Displaying File Contents: The most common use is to display the entire content of one or more files directly to the standard output (usually your terminal).
+
 ---
 
 ## 🧱 Level 1 - 2
-**Goal:**The password for the next level is stored in a file called - located in the home directory
+**Goal:** The password for the next level is stored in a file called - located in the home directory
 
 **Commands used:**
 ```bash
