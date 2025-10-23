@@ -11,6 +11,8 @@
 **Commands used:**
 ```bash
 cat ./--spaces\ in\ this\ filename--
+<password>
+
 ```
 
 ### ✅ Key Points:
@@ -40,19 +42,6 @@ bandit3@bandit:~/inhere$ cat ./...Hiding-From-You
 ### ✅ Key Points:
 using ls -a lists all directories/files in the current directory, including . (current) and ..(parent dir), and hidden files
 using ls -A lists all files/dir excluding the current and parent 
-
----
-## 🧱 Level 2-3 **Date:** [10/22/2025] 
-**Goal:** The password for the next level is stored in a file called --spaces in this filename-- located in the home director
-
-**Commands used:**
-```bash
-cat ./--spaces\ in\ this\ filename--
-```
-
-### ✅ Key Points:
-If your file name begins with -- (e.g., --my_file.txt), you need to tell the command that the -- is part of the filename and not an option. 
-You can do this by: Using ./ before the filename: This explicitly tells the shell that you're referring to a file in the current directory.
 
 ---
 
