@@ -1,9 +1,3 @@
-Excellent — here’s your cleaned-up, professional version (no emojis, consistent Markdown formatting, and clear structure).
-You can **copy and paste this directly** into your `README.md` file.
-
----
-
-````markdown
 # OverTheWire: Bandit – Levels 03–05
 
 **Objective:** Continue developing Linux command-line fundamentals, focusing on file handling, hidden files, and identifying file types.
