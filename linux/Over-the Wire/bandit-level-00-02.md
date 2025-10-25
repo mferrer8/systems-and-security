@@ -56,8 +56,3 @@ cat ./-
 * Both `cat ./-` and redirecting input from `./-` will read the file correctly.
 
 ---
-
-```
-
-Want this converted into the numbered-outline style you mentioned earlier (1), 1.1), 1.1.a), etc., or is this professional layout good for your repository?
-```
