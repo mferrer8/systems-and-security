@@ -1,65 +1,62 @@
-# 🧠 Chapter 2-04 – Fundamentals ChatGPT Prompts for Cyber Security
+# Chapter 2-04 – Writing Your First Cybersecurity Prompts
 
-**Status:** ✅ Completed  
+**Status:** Completed  
 **Focus:** Learning how to use ChatGPT for cybersecurity fundamentals and terminology  
+**Next:** Chapter 2-05 – Using ChatGPT for Exam Preparation  
 
 ---
 
-## 📘 Summary
+## Summary
 This video introduces how to use ChatGPT to learn cybersecurity concepts through effective prompting.  
 The instructor demonstrates using GPT to explain terminology, compare cybersecurity roles, and recommend industry podcasts — showing how conversational context improves accuracy and learning efficiency.
 
 ---
 
-## 🧩 Key Takeaways
+## Key Takeaways
 
-### 🧠 Using ChatGPT as a Cybersecurity Learning Tool
-- Instead of searching Google for terms, learners can prompt ChatGPT for **definitions, explanations, and contextual understanding**.  
+**Using ChatGPT as a Cybersecurity Learning Tool**
+- ChatGPT can replace traditional searches for definitions and explanations.  
 - Example prompt:  
-  > “What is the difference between the red team and blue team?”  
-  ChatGPT correctly identifies **Red Team** as offensive (attack simulation) and **Blue Team** as defensive (system protection).  
-- ChatGPT retains context between questions, allowing for **progressive learning** (e.g., following up with “What other color teams exist?”).
+  > "What is the difference between the red team and blue team?"  
+  ChatGPT correctly identifies Red Team as offensive and Blue Team as defensive.  
+- Follow-up questions build on prior responses, enabling progressive learning.
 
-### 💡 Contextual Awareness
-- ChatGPT’s **conversation memory** allows follow-up questions to refine or expand answers.  
-- Starting a **new chat** resets the context — useful for switching topics or testing model consistency.
+**Contextual Awareness**
+- ChatGPT retains context during a session, improving answer relevance.  
+- Starting a new chat resets context, useful for unrelated queries or testing consistency.
 
-### 🔐 Sample Cybersecurity Prompts
-- “Why is MFA important?”  
-- “Explain the Zero Trust model.”  
-- “Recommend top cybersecurity podcasts.”  
-
-These show how learners can use GPT to understand both **concepts** and **industry trends** interactively.
+**Sample Cybersecurity Prompts**
+- "Why is MFA important?"  
+- "Explain the Zero Trust model."  
+- "Recommend top cybersecurity podcasts."  
 
 ---
 
-## 🎧 Recommended Cybersecurity Podcasts (from instructor)
+## Recommended Cybersecurity Podcasts
 | Podcast | Description |
-|----------|--------------|
-| **Security Now!** (Steve Gibson & Leo Laporte) | Long-running show covering general cybersecurity and tech security news. |
-| **The CyberWire Daily** | Concise, news-driven updates on current cybersecurity events. |
-| **Darknet Diaries** (Jack Rhysider) | Storytelling format featuring real cybersecurity incidents and professionals. |
-| **Hacking Humans** | Focuses on phishing and social engineering tactics. |
-| **Risky Business** | News and expert commentary on global cybersecurity issues. |
-| **Smashing Security** | Humorous and engaging takes on cybersecurity and privacy. |
-| **CISO/Security Vendor Relationship Podcast** | Discusses security culture and industry vendor relationships. |
-
-> 🎧 *Tip:* Try a few episodes from different podcasts to find the hosts and formats that best match your learning style.
+|---------|-------------|
+| Security Now! (Steve Gibson & Leo Laporte) | Covers general cybersecurity and tech security news. |
+| The CyberWire Daily | Concise updates on current cybersecurity events. |
+| Darknet Diaries (Jack Rhysider) | Storytelling format featuring real cybersecurity incidents. |
+| Hacking Humans | Focuses on social engineering and phishing. |
+| Risky Business | News and expert commentary on global cybersecurity issues. |
+| Smashing Security | Engaging, humorous takes on cybersecurity and privacy. |
+| CISO/Security Vendor Relationship Podcast | Discusses security culture and industry vendor relationships. |
 
 ---
 
-## 🧰 Notes for SOC Analysts
-- Use ChatGPT to **break down technical jargon** from logs, reports, or certifications (like Security+ or CySA+).  
-- Always **verify** AI-provided definitions with credible cybersecurity sources (e.g., NIST, MITRE ATT&CK).  
-- Keep conversations topic-focused to improve GPT’s contextual accuracy.
+## Notes for SOC Analysts
+- Use ChatGPT to break down technical jargon from logs, reports, or certifications.  
+- Always verify AI-generated definitions with credible sources (e.g., NIST, MITRE ATT&CK).  
+- Keep prompts topic-focused to maintain contextual accuracy.
 
 ---
 
-## 🔄 How ChatGPT Has Changed (2025 Update)
-- **Improved domain knowledge:** GPT-5 provides more precise cybersecurity explanations, referencing frameworks like NIST, MITRE, and OWASP.  
-- **Context retention:** GPT-5 can hold longer, more detailed study sessions — up to hundreds of pages of context.  
-- **Dynamic resource linking:** It can now suggest **live sources** (e.g., podcast RSS feeds, documentation) when browsing is enabled.  
-- **Safer responses:** Jailbreak resistance and fact-checking improvements reduce misinformation in security contexts.
+## How ChatGPT Has Changed (2025 Update)
+- GPT-5 provides more precise cybersecurity explanations, referencing frameworks like NIST, MITRE, and OWASP.  
+- Improved context retention allows longer, more detailed study sessions.  
+- Can suggest live resources, including podcast RSS feeds and documentation.  
+- Enhanced safeguards reduce misinformation and improve safe usage for SOC learning.
 
 ---
 
