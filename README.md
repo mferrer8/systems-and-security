@@ -15,8 +15,9 @@ This repository documents my technical journey from field systems technician to 
 ### 🧱 Structure
 | Folder | Description |
 |---------|--------------|
+| **Independent Learning Portfolio/** | Course notes and summaries|
 | **linux/** | Linux command-line challenges and notes |
-| **scripts/** | Custom Bash/Python scripts used in labs |
+| **networking/** | Network fundamentals, Nmap scans, and Wireshark packet analysis exercises. |
 | **reports/** | Weekly summaries, analyses, and reflections |
 
 ---
