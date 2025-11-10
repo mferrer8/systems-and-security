@@ -1,0 +1,52 @@
+# Chapter 3-03 – Setting Up ChatGPT 4 for Cybersecurity
+
+**Status:** Completed  
+**Focus:** Exploring ChatGPT-4’s new tools, customization options, and integrations for cybersecurity operations
+
+---
+
+## Summary
+This video walks through how to set up and navigate ChatGPT-4’s upgraded interface, highlighting new features like file uploads, custom GPT creation, and integration with third-party systems — all of which can be leveraged for cybersecurity tasks such as log analysis, report generation, and SOC automation.
+
+---
+
+## Key Takeaways
+
+**Message Limitations**
+- GPT-4 includes a **rate limit of 40 messages per 3 hours** to manage system load.  
+- This limit is sufficient for most SOC and analysis tasks but encourages concise, efficient querying.
+
+**New Functional Features**
+- **File Uploads:**  
+  - Supported file types include `.csv`, `.pdf`, `.json`, `.docx`, and `.pptx`.  
+  - Up to **20 files** can be uploaded at once with a **10 GB per-user cap**.  
+  - Useful for importing network logs, vulnerability reports, and system documentation directly into a session.  
+
+- **Custom GPT Creation:**  
+  - Allows users to **build their own AI agent** with specific instructions, uploaded datasets, and custom behavior.  
+  - Example use case: upload historical SOC reports to train a model that mimics your writing and analytical style.  
+  - **Action Integration:** GPTs can authenticate via **API keys** to interact with external tools like SIEMs or ticketing systems.
+
+- **Custom Instructions:**  
+  - Personalize GPT responses by defining your role (e.g., “You are a SOC Analyst”) and preferred tone or output format (e.g., JSON, markdown).  
+  - Supports creating consistent and structured reports for incident documentation or threat summaries.
+
+- **Settings & Beta Features:**  
+  - **Plugins:** Enable real-time access to external services or data feeds.  
+  - **Chat History:** Option to enable/disable saving of interactions.  
+  - **Code Output Controls:** Auto-expand long code responses for easier viewing.  
+  - **Theme and Profile Settings:** Allow interface customization and public agent visibility for shared GPTs.
+
+**Practical SOC Use Cases**
+- Import and analyze **SIEM export logs** or **packet captures**.  
+- Create internal **incident report templates** or **playbook automation assistants**.  
+- Integrate with external **security APIs** for real-time vulnerability or threat intelligence lookups.  
+- Deploy team-shared GPTs trained on **company-specific procedures**.
+
+**ChatGPT-5 Update**
+- ChatGPT-5 improves on these features with **expanded file capacity**, **faster API-driven integrations**, and **enhanced SOC action automation** through adaptive multi-agent support.  
+- Offers a more seamless link between uploaded cybersecurity data and active incident response workflows.
+
+---
+
+**End of Chapter 3-03**
