@@ -5,9 +5,6 @@
 ## ==========================================================
 ##  FILE: file-check.sh
 ##  PURPOSE: Check if a file exists and tell the user.
-##  AUTHOR: marc ferrer
-##  LOCATION: ~/linux/scripts/
-##  ==========================================================
 ##  USAGE EXAMPLES:
 ##    1️⃣ ./file-check.sh myfile.txt
 ##        → checks if myfile.txt exists in current folder
@@ -36,7 +33,7 @@ fi
 
 ---
 
-### 🧠 **Breakdown (like you’re in 4th grade)**
+### 🧠 **Breakdown**
 
 | Code                   | What It Means                                                            |
 | ---------------------- | ------------------------------------------------------------------------ |
