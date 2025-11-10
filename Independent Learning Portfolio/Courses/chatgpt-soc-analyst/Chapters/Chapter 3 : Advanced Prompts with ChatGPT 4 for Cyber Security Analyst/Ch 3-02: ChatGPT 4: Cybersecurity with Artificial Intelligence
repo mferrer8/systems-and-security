@@ -1,0 +1,38 @@
+# Chapter 3-02 – ChatGPT 4: Cybersecurity with Artificial Intelligence
+
+**Status:** Completed  
+**Focus:** Overview of ChatGPT-4’s premium features and relevance to cybersecurity professionals
+
+---
+
+## Summary
+This video introduces ChatGPT-4 and explains how to upgrade to the premium plan. The instructor highlights the added tools and benefits of ChatGPT-4, emphasizing its importance for advanced cybersecurity applications and professional workflows.
+
+---
+
+## Key Takeaways
+
+**Upgrading to ChatGPT-4**
+- ChatGPT-4 is available through a **paid Plus subscription** ($20/month).  
+- Upgrade path: From the ChatGPT interface → click **GPT-3.5** → select **Upgrade to Plus** → enter billing details.  
+- Once upgraded, users gain access to GPT-4 and enhanced capabilities.
+
+**New Features in ChatGPT-4**
+- **Advanced Data Analysis (ADA):** Enables analysts to process log files, CSVs, and security datasets directly.  
+- **DALL·E Integration:** Useful for visualizing network architectures or threat maps.  
+- **Browsing Capability:** Allows retrieval of real-time cybersecurity updates, threat intelligence, and CVE information.  
+- **Custom GPTs:** Enables users to create tailored AI models for SOC workflows or company-specific security procedures.  
+- **Team Plan Option:** Supports collaboration within security teams or organizations.
+
+**Value for SOC Analysts**
+- GPT-4 enhances **incident response**, **automation**, and **threat intelligence gathering**.  
+- Offers more precise, context-aware reasoning compared to GPT-3.5.  
+- Essential for cybersecurity professionals seeking to stay ahead of evolving threats through AI-assisted operations.
+
+**ChatGPT-5 Update**
+- ChatGPT-5 introduces improved **multi-modal reasoning**, faster **log interpretation**, and **API integration** features ideal for SOC environments.  
+- Expands automation potential without compromising oversight — reinforcing the analyst’s decision-making rather than replacing it.
+
+---
+
+**End of Chapter 3-02**
